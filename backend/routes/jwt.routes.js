@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.router();
+const router = express.Router();
 const jwt = require("jsonwebtoken");
 
 router.get("/", (req, res) => {
@@ -12,7 +12,7 @@ console.postMiddleware = (req, res, next) => {
     next();
 };
 
-router.post("/", postMiddleware, (req, res) => {
+router.post("/", (req, res) => {
     const {token} = req.body;
 
     jwt.verify(token, "shh", function (err, decoded) {
