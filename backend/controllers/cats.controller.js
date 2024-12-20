@@ -1,4 +1,4 @@
-const cats = [
+cats = [ //this one const made things really damn hard to figure out
   {
     id: "7d613b93-fa3e-4ef3-a9d2-e09e5ca6e4e6",
     name: "Meow",
@@ -41,6 +41,24 @@ exports.read = (req, res) => {
   res.send(cats.filter((entry) =>entry.deleted == false));
 };
 
-exports.update = (req, res) => {};
+exports.update = (req, res) => {
+  console.log("update");
+  updCats = cats.map(targetCats => {if(targetCats.id == req.body.id){
+    return {...targetCats, name: req.body.name, updatedAt: Date.now()};
+  } //assuming that updatedAt is supposed to be the time of the last update
+  return targetCats;
+  });
+//realistically the same as the delete query
+cats = updCats;
+res.send(updCats);
+};
 
-exports.delete = (req, res) => {};
+exports.delete = (req, res) => {
+  delCats = cats.map(targetCats => {if(targetCats.id == req.body.id){
+      return {...targetCats, deleted: true};
+    }
+    return targetCats;
+    });
+  cats = delCats;
+  res.send(delCats);
+};

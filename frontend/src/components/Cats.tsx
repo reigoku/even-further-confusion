@@ -1,6 +1,8 @@
 import { Box, List, ListItem, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SubmitCat from "./SubmitCat";
+import UpdateCat from "./updateCat";
+import DeleteCat from "./deleteCat";
 
 type Cat = {
   id: string;
@@ -28,9 +30,16 @@ const Cats = () => {
     <Box>
       <Typography variant="h3">Cats</Typography>
       <List>
-        {cats.map((cat) => (
-          <ListItem key={cat.id}>{JSON.stringify(cat)}</ListItem>
-        ))}
+          {cats.map((cat) => (
+            <ListItem key={cat.id}>
+              <Box sx={{ p: 1, border: '1px solid grey' }}>
+                <h2>{JSON.stringify(cat.name)}</h2>
+                <p id = "id">{JSON.stringify(cat.id)}</p>
+                <UpdateCat id={cat.id} fetchCats = {fetchCats} />
+                <DeleteCat id={cat.id} fetchCats = {fetchCats} />
+              </Box>
+            </ListItem>
+          ))}
       </List>
       <SubmitCat fetchCats={fetchCats} />
     </Box>

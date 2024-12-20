@@ -46,7 +46,7 @@
   
   exports.update = (req, res) => {
     updTodo = todo.map(targetTodo => {if(targetTodo.id == req.body.id){
-      return {...targetTodo, title: req.body.title, priority: parseInt(req.body.priority)};
+      return {...targetTodo, title: req.body.title, priority: parseInt(req.body.priority), updatedAt: Date.now()};
     }
     return targetTodo;
     });
