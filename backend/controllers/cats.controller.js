@@ -38,7 +38,7 @@ exports.create = (req, res) => {
 };
 
 exports.read = (req, res) => {
-  res.send(cats);
+  res.send(cats.filter((entry) =>entry.deleted == false));
 };
 
 exports.update = (req, res) => {};

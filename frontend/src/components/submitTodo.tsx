@@ -6,7 +6,7 @@ type SubmitTodoProps = {
 };
 
 const SubmitTodos = ({ fetchTodos }: SubmitTodoProps) => {
-  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
 
   const submitTodos = async () => {
     try {
@@ -16,7 +16,7 @@ const SubmitTodos = ({ fetchTodos }: SubmitTodoProps) => {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name: name }),
+        body: JSON.stringify({ title: title }),
       });
 
       if (response.ok) {
@@ -33,8 +33,9 @@ const SubmitTodos = ({ fetchTodos }: SubmitTodoProps) => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-
+    console.log("try submit");
     submitTodos();
+    console.log("submitted");
     setTimeout(fetchTodos, 100);
   };
 
@@ -46,7 +47,7 @@ const SubmitTodos = ({ fetchTodos }: SubmitTodoProps) => {
         <Stack>
           <TextField
             label="Task name"
-            onChange={(event) => setName(event.target.value)}
+            onChange={(event) => setTitle(event.target.value)}
           />
           <Button type="submit">Add</Button>
         </Stack>
